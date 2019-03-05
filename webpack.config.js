@@ -7,6 +7,7 @@ var config = {
         main: './main'
     },
     output: {
+        path: path.join(__dirname, './dist'),
         publicPath: '/dist/',
         filename: '[name].js',
         chunkFilename: '[name].chunk.js'
@@ -40,6 +41,7 @@ var config = {
         ]
     },
     plugins: [
+        new ExtractTextPlugin('main.css'),
         new VueLoaderPlugin(),
         new ExtractTextPlugin({
             filename: '[name].css',

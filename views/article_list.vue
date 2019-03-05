@@ -36,11 +36,12 @@
             let _this = this;
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
-                if(xhr.readystate == 4) {
+                if(xhr.readyState == 4) {
                     const status = xhr.status;
                     if((status>=200 && status<300) || status==304) {
                         let data = JSON.parse(xhr.responseText);
                         _this.data = data;
+                        console.log(data);
                     }
                 }
             }
