@@ -8,7 +8,7 @@ const Routers = [
         component: (resolve) => require(['./views/article_list.vue'], resolve)
     },
     {
-        path: '/user/:id',
+        path: '/post/:id',
         component: (resolve) => require(['./views/article.vue'], resolve)
     },
     {
