@@ -18,6 +18,7 @@ const Routers = [
 ];
 
 const RouterConfig = {
+    mode: 'history',
     routes: Routers
 }
 

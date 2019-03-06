@@ -8,7 +8,7 @@ var VueLoaderPlugin = require('vue-loader/lib/plugin');
 webpackBaseConfig.plugins = [];
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: './dist/',
+        publicPath: '/dist/',
         filename: '[name].[hash].js'
     },
     plugins: [
@@ -22,8 +22,8 @@ module.exports = merge(webpackBaseConfig, {
             }
         }),
         new HtmlwebpackPlugin({
-            filename: '../index_prod.html',
-            template: './index.html'
+            filename: '../index.html',
+            template: './index_template.html'
         }),
         new VueLoaderPlugin()
     ]

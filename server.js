@@ -1,44 +1,56 @@
 var express = require('express');
+var assert = require('assert');
+var history = require('connect-history-api-fallback');
+const MongoClient = require('mongodb').MongoClient;
+const dbURL = 'mongodb://localhost:27017';
+const db_utils = require('./db_utils');
+const client = new MongoClient(dbURL);
+
+
+var data = [];
+
 var fs = require('fs');
-
 let app = express();
-
-var data = [{
-    id: 1,
-    title: 'article1',
-    shortcut: 'this is the shortcut of article1',
-    view: 20,
-    comments: 1,
-    time: '2019-02-11'
-},
-{
-    id: 2,
-    title: 'article2',
-    shortcut: 'this is the shortcut of article2',
-    view: 18,
-    comments: 2,
-    time: '2019-03-05'
-}];
-
 var info = {};
+
+app.use(history({
+    rewrites: [
+        {
+            from: /\/article_list/, to(context) {return context.parsedUrl.pathname}
+        },
+        {
+            from: /\/article_info\/\d+/, to(context) {return context.parsedUrl.pathname}
+        }
+    ]
+}));
 
 app.use(express.static(__dirname + '/static'));
 
 app.use(function(req, res, next) {
-    console.log('new req', req.method, req.url);
-    if(req.url == '/' && req.method.toLowerCase() == 'get') {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        fs.createReadStream('index_prod.html').pipe(res);
-    };
-    if(req.url == '/article_list' && req.method.toLowerCase() == 'get') {
-        res.writeHead(200);
-        res.end(JSON.stringify(data));
-    };
-    if(req.url == '/aritilce_info' && req.method.toLowerCase() == 'get') {
-        res.writeHead(200);
-        res.end(JSON.stringify(info));
-    }
+    console.log(req.method, req.url);
     next();
+})
+app.get(/\/(index.html)?$/, function(req, res, next) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    fs.createReadStream('index.html').pipe(res);
+})
+app.get('/article_list', async function(req, res, next) {
+    await client.connect();
+    const db = client.db('blog');
+    data = await db_utils.findDocuments(db, 'article_infos', {}).catch(e => console.log(e));
+    res.writeHead(200);
+    res.end(JSON.stringify(data));
+    console.log('\n \n \n')
+})
+app.get('/article_info/:id', function(req, res, next) {
+    res.writeHead(200);
+    let id = req.params['id'];
+    res.end(JSON.stringify(id));
+    console.log(id);
+})
+app.get('*', function(req,res, next){
+    res.writeHead(404);
+    res.end('404 Not Found')
 })
 
 app.listen(3000);
