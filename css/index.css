@@ -1,13 +1,24 @@
-* {margin:0; padding:0; box-sizing:border-box;}
+* {margin:0; padding:0; box-sizing:border-box; vertical-align:bottom;}
 html {height:100%;}
-body {background-color:#eee; height:100%;}
+body {height:100%;}
 .clearfix::after {content:'.'; height:0; visibility:hidden; display:block; clear:both;}
 
-header {width:100%; min-width:1140px; height:120px;}
+header {width:100%; min-width:1140px; height:180px; background:url(../img/5cm.jgp) no-repeat center center;}
 header nav {width:100%; height:40px; background-color:rgba(121, 184, 202, 0.8);}
 
-#main {width:1000px; height:calc(100% - 300px); margin:30px auto 0 auto; background-color:#eee; min-height:500px;}
-#app {width:800px; height:100%; background-color:#fff; float:left;}
-#chatroom {width:198px; height:100%; background-color:#fff; float:left; margin-left:2px;}
+#main {width:800px; height:auto; margin:40px auto 0 auto;}
+#app {width:100%; height:auto;}
 
-footer {width:100%; min-width:1140px; margin-top:50px; background-color:#fff; height:100px;}
+.article_item {height:auto; margin-top:40px; padding-bottom:40px; border-bottom:solid 1px #ccc;}
+.article_item a {text-decoration:none; color:black;}
+.article_item p, .article_item span {color:#ccc;}
+span.view {margin-left: 350px;}
+span.comment_count {margin-left:20px;}
+.item_info {margin-bottom:40px;}
+.pageIndex {margin-top:120px; position:relative;}
+.prePage {float:left; cursor:pointer;}
+.nextPage {float:right; cursor:pointer;}
+
+#chatroom {width:100px; height:100px; position:fixed; background-color:#eee; border-radius:50px;}
+
+footer {width:100%; min-width:1140px; margin-top:50px; height:100px;}

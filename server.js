@@ -54,6 +54,13 @@ app.get('/article_info/:id', async function(req, res, next) {
     let id = req.params['id'];
     const db = client.db('blog');
     let [article_data] = await db_utils.findDocuments(db, 'article', {id: parseInt(id)}).catch(e => console.log(e));
+    let newC = article_data.view + 1;
+    console.log(newC);
+    await db_utils.updateDocument(db, 'article', {id: parseInt(id)}, {view:newC}).catch(e => console.log(e));
+    let [data] = await db_utils.findDocuments(db, 'article_infos', {id: parseInt(id)}).catch(e => console.log(e));
+    newC = data.view + 1;
+    console.log(newC);
+    await db_utils.updateDocument(db, 'article_infos', {id: parseInt(id)}, {view: newC});
     console.log(article_data);
     res.writeHead(200);
     res.end(JSON.stringify(article_data));
@@ -72,9 +79,18 @@ app.get('*', function(req,res, next){
 })
 app.post('/comment/:id', async function(req, res, next) {
     let comment = req.body;
+    let id = req.params['id'];
     console.log(comment);
     const db = client.db('blog');
-    await db_utils.insertDocuments(db, 'comment', comment)
+    await db_utils.insertDocuments(db, 'comment', comment);
+    let [article_data] = await db_utils.findDocuments(db, 'article', {id: parseInt(id)}).catch(e => console.log(e));
+    let newC = article_data.comments + 1;
+    await db_utils.updateDocument(db, 'article', {id: parseInt(id)}, {comments: newC}).catch(e => console.log(e));
+    let [data] = await db_utils.findDocuments(db, 'article_infos', {id: parseInt(id)}).catch(e => console.Console(e));
+    console.log(data);
+    newC = data.comments + 1;
+    console.log(data);
+    await db_utils.updateDocument(db, 'article_infos', {id: parseInt(id)}, {comments: newC});
     console.log('success');
     res.writeHead(200);
     res.end(JSON.stringify([]));

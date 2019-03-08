@@ -1,23 +1,18 @@
 <template>
     <div class='article'>
-        <h2>{{ blog.title }}</h2>
-        <div class='info'><span>阅读:{{ blog.view }}</span><span>评论:{{ blog.comments }}</span><span>{{ blog.time }}</span></div>
-        <p>{{ blog.content }}</p>
+        <div class='title'><h2>{{ blog.title }}</h2></div>
+        <div class='info'><span>view:{{ blog.view }}</span><span>comment:{{ blog.comments }}</span><span>{{ blog.time }}</span></div>
+        <p class='content'>{{ blog.content }}</p>
         <div class='comment'>
             <div :class='"wordCount " + warn'>({{ words }}/100)</div>
-            <textarea placeholder="发个友善的评论见证下 (=・ω・=)" v-model='comment'> </textarea>
-            <button @click='sendcomment'>评论</button><button>清空</button>
+            <textarea placeholder="发个友善的评论交流下 (=・ω・=)" v-model='comment'> </textarea>
+            <button @click='sendcomment'>评论</button><button @click='clear'>清空</button>
         </div>
         <div class='comment-zone'>
-            <ul>
-                <li v-for='comment in comments'>
-                    <div>
-                        
-                    </div>
-                </li>
-            </ul>
+            <div v-for='comment_item in comments' class='comment_item'>
+                <p>{{ comment_item.user_id }}: {{ comment_item.content }}</p>
+            </div>
         </div>
-        
     </div>
 </template>
 
@@ -26,10 +21,10 @@
         data() {
             return {
                 blog: {
-                    
                 },
                 comments: [],
                 comment: '',
+                words: 100,
                 warn: ''
 
             }
@@ -89,6 +84,7 @@
                             console.log(resdata);
                             _this.getComments();
                             _this.comment = '';
+                            _this.blog.comments ++;
                         } else {
                             console.log('send failed');
                         }
@@ -113,6 +109,9 @@
                 xhr.open('POST', url, true);
                 xhr.setRequestHeader('Content-Type', 'application/json')
                 xhr.send(JSON.stringify(comment_info));
+            },
+            clear() {
+                this.comment = '';
             }
         },
         watch: {
@@ -133,17 +132,18 @@
 </script>
 
 <style scoped>
-    div.article {height:100%; min-height:500px; overflow: scroll; text-align:center;}
-    .info {width:100%; border-bottom:solid 1px #ccc; height:20px; font-size:12px; position:relative;}
+    div.article {height:auto; overflow: scroll;}
+    div.title {width:100%; text-align:center; margin-bottom:20px;}
+    .info {width:100%; height:20px; font-size:12px; position:relative;}
     span:nth-child(1) {position:absolute; left:50px;}
     span:nth-child(2) {position:absolute; left:110px;}
     span:nth-child(3) {position:absolute; right:50px;}
-    p {height:calc(100% - 143px); font-size:14px; text-indent:2em;}
-    .comment-zone {height:0;}
+    p.content {height:auto; min-height:400px; font-size:18px; text-indent:2em; margin-top:20px;}
+    .comment-zone {}
     .comment {height:90px; position:relative;}
+    .comment_item {margin-top:20px; padding-bottom:20px; border-bottom:solid 1px #ccc;}
     .wordCount {position:absolute; font-size:10px; right:5px; bottom:10px;}
     .wordCount.tooMany {color:red;}
-    textarea {width:100%; height:60px; border:none; border-top:solid 1px #ccc; resize:none; padding:10px 0 0 10px; font-size:14px;}
-    div {text-align:center;}
+    textarea {width:100%; height:60px; border:solid 1px #ccc; resize:none; padding:10px 0 0 10px; font-size:14px; outline:none;}
     button:nth-child(odd) {margin-right:20px; background-color:#fff;}
 </style>
