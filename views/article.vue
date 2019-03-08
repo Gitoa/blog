@@ -65,6 +65,10 @@
                 xhr.send(null);
             },
             sendcomment() {
+                if(!this.$store.state.login) {
+                    alert('请先登录')
+                    return;
+                }
                 let _this = this;
                 let url = '/comment/' + _this.$route.params.id;
                 if(_this.words < 0) {

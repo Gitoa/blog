@@ -19,6 +19,11 @@
         },
         methods: {
             sendcomment() {
+                console.log('login:', this.$store.state.login);
+                if(!this.$store.state.login) {
+                    alert('请先登录')
+                    return;
+                }
                 let _this = this;
                 let url = '/comment';
                 if(_this.words < 0) {
@@ -34,7 +39,6 @@
                         const status = xhr.status;
                         if((status<300 && status>=200) || status == 304) {
                             console.log('send success');
-                            
                         } else {
                             console.log('send failed');
                         }

@@ -1,4 +1,6 @@
 
+span.signout[data-v-7ea6ecdc]{margin-right:20px;}
+
 div.article[data-v-43077537] {height:auto; overflow: scroll;}
 div.title[data-v-43077537] {width:100%; text-align:center; margin-bottom:20px;}
 .info[data-v-43077537] {width:100%; height:20px; font-size:12px; position:relative;}
@@ -13,3 +15,8 @@ p.content[data-v-43077537] {height:auto; min-height:400px; font-size:18px; text-
 .wordCount.tooMany[data-v-43077537] {color:red;}
 textarea[data-v-43077537] {width:100%; height:60px; border:solid 1px #ccc; resize:none; padding:10px 0 0 10px; font-size:14px; outline:none;}
 button[data-v-43077537]:nth-child(odd) {margin-right:20px; background-color:#fff;}
+
+.login[data-v-696b872c] {width:500px; height:auto; padding-top:30px 0; border:solid 1px rgba(121, 184, 202, 0.8); margin:0 auto; text-align:center; color:#0084FF;}
+.username[data-v-696b872c], .password[data-v-696b872c] {border:none; border-bottom:solid 1px #ccc; margin-top:40px; width:200px; font-size:16px; height:30px; padding-bottom:5px; outline:none;}
+input[type=submit][data-v-696b872c] {border:none; padding:5px; font-size:16px; background-color:#0084FF; color:#fff; margin-top:40px;}
+form[data-v-696b872c] {margin-bottom:40px;}

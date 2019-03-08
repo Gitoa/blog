@@ -15,6 +15,10 @@ var config = {
     module: {
         rules: [
             {
+                test: /\.(jpg|png|svg|fig)\??.*$/,
+                loader: 'url-loader?limit=1024'
+            },
+            {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {

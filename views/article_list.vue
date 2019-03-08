@@ -31,16 +31,15 @@
                 if(xhr.readyState == 4) {
                     const status = xhr.status;
                     if((status>=200 && status<300) || status==304) {
-                        let data = JSON.parse(xhr.responseText);
+                        let {login, user, data} = JSON.parse(xhr.responseText);
+                        console.log(login);
+                        _this.$store.commit('setLogin', login);
+                        if(login) _this.$store.commit('setUser', user);
                         _this.data = data;
-                        console.log(_this.data);
                         _this.currentData = data.slice(0, _this.maxLength);
-                        console.log(_this.data.length, _this.maxLength);
                         _this.totalPage = Math.ceil(_this.data.length / _this.maxLength);
-                        console.log(_this.totalPage);
                         if(_this.totalPage > 1) _this.next = true;
                         _this.prev = false;
-                        console.log(data);
                     }
                 }
             }
