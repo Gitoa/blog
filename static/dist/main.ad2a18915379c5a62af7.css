@@ -16,7 +16,16 @@ p.content[data-v-43077537] {height:auto; min-height:400px; font-size:18px; text-
 textarea[data-v-43077537] {width:100%; height:60px; border:solid 1px #ccc; resize:none; padding:10px 0 0 10px; font-size:14px; outline:none;}
 button[data-v-43077537]:nth-child(odd) {margin-right:20px; background-color:#fff;}
 
-.login[data-v-696b872c] {width:500px; height:auto; padding-top:30px 0; border:solid 1px rgba(121, 184, 202, 0.8); margin:0 auto; text-align:center; color:#0084FF;}
+.login[data-v-696b872c] {width:500px; height:480px; padding:30px 0; border:solid 1px rgba(121, 184, 202, 0.8); margin:0 auto; text-align:center; color:#0084FF;}
 .username[data-v-696b872c], .password[data-v-696b872c] {border:none; border-bottom:solid 1px #ccc; margin-top:40px; width:200px; font-size:16px; height:30px; padding-bottom:5px; outline:none;}
 input[type=submit][data-v-696b872c] {border:none; padding:5px; font-size:16px; background-color:#0084FF; color:#fff; margin-top:40px;}
 form[data-v-696b872c] {margin-bottom:40px;}
+form.signin[data-v-696b872c] {position:absolute; top:108px; left:149px; transform-origin:center center -100px; transform:rotate3d(0, 0, 0, 90deg); transition:transform 0.6s linear 0s;}
+form.signin.hidden[data-v-696b872c] {-webkit-transform:rotate3d(0, 1, 0, 90deg);}
+form.signup.hidden[data-v-696b872c] {-webkit-transform:rotate3d(0, -1, 0, 90deg);}
+form.signup[data-v-696b872c] {position:absolute; top:108px; left:149px; transform-origin:center center -100px; transform:rotete3d(0, 0, 0, 90deg);  transition:transform 0.6s linear 0s;}
+div.signin[data-v-696b872c] {width:100%; position:absolute; bottom:30px; transform-origin:center center -11px; transform:rotate3d(0, 0, 0, 90deg); transition:transform 0.6s linear 0s;}
+div.signin.hidden[data-v-696b872c] {-webkit-transform:rotate3d(1, 0, 0, 90deg);}
+div.signup.hidden[data-v-696b872c] {-webkit-transform:rotate3d(-1, 0, 0, 90deg);}
+div.signup[data-v-696b872c] {width:100%; position:absolute; bottom:30px; transform-origin:center center -11px; transform:rotate3d(0, 0, 0, 90deg); transition:transform 0.6s linear 0s;}
+a[data-v-696b872c] {cursor:pointer;}

@@ -45,7 +45,8 @@
                 el.classList.remove('on');
             },
             signin() {
-                this.$store.commit('setPreUrl', document.location.href);
+                console.log('prevpage', document.location.pathname);
+                this.$store.commit('setPreUrl', document.location.pathname);
                 this.$router.push('/signin');
             },
             signout() {

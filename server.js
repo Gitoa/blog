@@ -44,6 +44,7 @@ app.use(express.static(__dirname + '/static'));
 app.use(function(req, res, next) {
     console.log(req.method, req.url);
     console.log(req.cookies);
+    console.log(!req.cookies);
     next();
 })
 app.get(/\/(index.html)?$/, function(req, res, next) {
@@ -92,6 +93,12 @@ app.get('/signout', function(req, res, next) {
     res.end();
 }) 
 app.post('/comment/:id', async function(req, res, next) {
+    let login = !!req.cookies.user;
+    if(!login) {
+        res.writeHead(200);
+        res.end(JSON.stringify({success:false, msg:'sign in first'}));
+        return;
+    }
     const db = client.db('blog');
     let comment = req.body;
     let id = req.params['id'];
@@ -107,7 +114,7 @@ app.post('/comment/:id', async function(req, res, next) {
     await db_utils.updateDocument(db, 'article_infos', {id: parseInt(id)}, {comments: newC});
     console.log('success');
     res.writeHead(200);
-    res.end(JSON.stringify([]));
+    res.end(JSON.stringify({success:true, msg:''}));
 })
 app.post('/signin', async function(req, res, next) {
     const db = client.db('blog');
@@ -124,7 +131,7 @@ app.post('/signin', async function(req, res, next) {
             res.end(JSON.stringify({success: false, msg: 'wrong password'}))
         } else {//还需要设置cookie
             var cookies = new Cookies(req, res);
-            cookies.set('user', p.account, {'maxAge':600000});
+            cookies.set('user', p.account, {'maxAge':60000});
             res.writeHead(200);
             res.end(JSON.stringify({success: true, msg: 'login success'}))
         }

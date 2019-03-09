@@ -26,6 +26,6 @@ span.comment_count {margin-left:20px;}
 .prePage {float:left; cursor:pointer;}
 .nextPage {float:right; cursor:pointer;}
 
-#chatroom {width:100px; height:100px; position:fixed; background-color:#eee; border-radius:50px;}
+div.login {position:relative;}
 
 footer {width:100%; min-width:1140px; margin-top:50px; height:100px;}

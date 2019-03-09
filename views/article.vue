@@ -84,8 +84,14 @@
                         const status = xhr.status;
                         if((status<300 && status>=200) || status == 304) {
                             console.log('send success');
-                            let resdata = JSON.parse(xhr.responseText);
-                            console.log(resdata);
+                            let {success, msg} = JSON.parse(xhr.responseText);
+                            console.log(success, msg);
+                            if(!success) {
+                                _this.$store.commit('setLogin', false);
+                                _this.$store.commit('setUser', '');
+                                alert(msg);
+                                return;
+                            }
                             _this.getComments();
                             _this.comment = '';
                             _this.blog.comments ++;
@@ -105,7 +111,7 @@
                 let comment_info = {
                     id: _this.blog.id + '_' + (_this.comments.length + 1),
                     article_id: _this.blog.id,
-                    user_id: 'gg',
+                    user_id: _this.$store.state.user,
                     content: _this.comment,
                     time: now,
                     to_user: 'mm'
