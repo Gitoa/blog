@@ -2,17 +2,18 @@
 <div>
     <header>
         <nav>
-            <div class='header_main'>
-                <div class='user'>
-                    <div class='user_head'></div>
-                </div>
-                <div class='user_info'>
-                    <div v-if='login'>
-                        <span @click='signout' class='signout'>Sign out</span>
-                        <span>{{ userName }}</span>
-                    </div>
-                    <div v-if='!login'>
-                        <span @click='signin'>Sign in</span>
+            <div class='right_bar'>
+                <div class='user' @mouseenter = 'enter' @mouseleave = 'leave'>
+                    <div class='default_head' v-if='!login'></div>
+                    <div class='user_head' v-if='login'></div>
+                    <div class='user_info'>
+                        <div v-if='login'>
+                            <span @click='signout' class='signout'>Sign out</span>
+                            <span>{{ userName }}</span>
+                        </div>
+                        <div v-if='!login'>
+                            <span @click='signin'>Sign in</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,6 +36,14 @@
             }
         },
         methods: {
+            enter() {
+                let el = document.querySelector('.user');
+                el.classList.add('on');
+            },
+            leave() {
+                let el = document.querySelector('.user');
+                el.classList.remove('on');
+            },
             signin() {
                 this.$store.commit('setPreUrl', document.location.href);
                 this.$router.push('/signin');

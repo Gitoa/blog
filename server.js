@@ -124,7 +124,7 @@ app.post('/signin', async function(req, res, next) {
             res.end(JSON.stringify({success: false, msg: 'wrong password'}))
         } else {//还需要设置cookie
             var cookies = new Cookies(req, res);
-            cookies.set('user', p.account, {'maxAge':100000});
+            cookies.set('user', p.account, {'maxAge':600000});
             res.writeHead(200);
             res.end(JSON.stringify({success: true, msg: 'login success'}))
         }
